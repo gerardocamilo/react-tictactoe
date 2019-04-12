@@ -17,19 +17,23 @@ function Square(props) {
       this.state = {
         squares : Array(9).fill(null),
         xIsNext : true,
+        isWon: false,
       }
     }
     
     handleClick(i) {
       const squares = this.state.squares.slice();
-      if (squares[i] == null) {
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
       
-        this.setState({
-          squares: squares,
-          xIsNext: !this.state.xIsNext,
-        });  
+      if(this.state.isWon || squares[i]){
+        return;
       }
+      
+      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+      });  
     }
 
     renderSquare(i) {
@@ -46,6 +50,7 @@ function Square(props) {
       
       if (winner) {
         status = 'Winner: ' + winner; 
+        this.state.isWon = true;
       } else {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       }
