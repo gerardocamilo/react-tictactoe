@@ -50,7 +50,7 @@ function Square(props) {
       
       if (winner) {
         status = 'Winner: ' + winner; 
-        this.state.isWon = true;
+        this.setState({isWon: true});
       } else {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       }
